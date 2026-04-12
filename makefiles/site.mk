@@ -6,6 +6,7 @@ SITE_COMMON_ROOT := $(dir $(lastword $(MAKEFILE_LIST)))..
 
 -include $(SITE_COMMON_ROOT)/tools/build-tools/makefiles/help.mk
 -include $(SITE_COMMON_ROOT)/tools/build-tools/makefiles/functions.mk
+-include $(SITE_COMMON_ROOT)/tools/build-tools/makefiles/repo-init.mk
 
 ################################################################################
 
