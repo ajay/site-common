@@ -6,7 +6,7 @@ SITE_COMMON_ROOT := $(dir $(lastword $(MAKEFILE_LIST)))..
 
 -include $(SITE_COMMON_ROOT)/tools/build-tools/makefiles/help.mk
 -include $(SITE_COMMON_ROOT)/tools/build-tools/makefiles/functions.mk
--include $(SITE_COMMON_ROOT)/tools/build-tools/makefiles/repo-init.mk
+-include $(SITE_COMMON_ROOT)/tools/build-tools/makefiles/repo.mk
 
 ################################################################################
 
@@ -44,9 +44,17 @@ $(info )
 
 ################################################################################
 
-.PHONY: help clean serve dev versions
+.PHONY: help clean serve dev versions ci
 
 .DEFAULT_GOAL := help
+
+################################################################################
+
+ci: repo-check
+	@## run CI checks and build
+	$(Q) if make -n build 2>/dev/null; then \
+		$(MAKE) build; \
+	fi
 
 ################################################################################
 
