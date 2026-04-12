@@ -43,16 +43,9 @@ $(info )
 
 ################################################################################
 
-.PHONY: help repo-init clean serve dev versions
+.PHONY: help clean serve dev versions
 
 .DEFAULT_GOAL := help
-
-################################################################################
-
-repo-init:
-	@## initialize git submodules
-	git submodule sync --recursive
-	git submodule update --init --recursive
 
 ################################################################################
 
