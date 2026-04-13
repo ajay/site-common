@@ -29,7 +29,7 @@ dev: serve
 
 install-deps:
 	@## install dependencies
-	$(SITE_COMMON_ROOT)/tools/deps/os/$(OS).sh
+	$(SITE_COMMON_ROOT)/tools/build-tools/tools/deps/os/$(OS).sh
 
 serve:
 	@## start local dev server

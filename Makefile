@@ -30,6 +30,6 @@ ci: repo-check lint
 
 install-deps:
 	@## install dependencies
-	tools/deps/os/$(OS).sh
+	$(REPO_ROOT)/tools/build-tools/tools/deps/os/$(OS).sh
 
 ################################################################################
