@@ -8,16 +8,6 @@ SITE_COMMON_ROOT := $(dir $(lastword $(MAKEFILE_LIST)))..
 
 ################################################################################
 
-verbose ?= true
-
-ifeq ($(verbose), true)
-	Q :=
-else
-	Q := @
-endif
-
-################################################################################
-
 .PHONY: help ci clean dev install-deps serve versions
 
 .DEFAULT_GOAL := help
