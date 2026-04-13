@@ -65,7 +65,7 @@ ci: repo-check lint
 		$(MAKE) build; \
 	fi
 
-clean:
+clean::
 	@## clean generated files
 	$(Q) $(RM) build
 
@@ -80,7 +80,7 @@ serve:
 	@## start local dev server
 	$(Q) $(PYTHON) -m http.server 8000
 
-versions:
+versions::
 	@## print tool versions
 	$(call print_tool_version,$(PYTHON),$(PYTHON))
 
