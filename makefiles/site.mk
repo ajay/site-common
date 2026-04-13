@@ -75,16 +75,19 @@ install-deps:
 	@## install dependencies
 	$(SITE_COMMON_ROOT)/tools/deps/os/$(OS).sh
 
+LINT_HTML_EXCLUDE := .git build node_modules
+LINT_JSON_EXCLUDE := .git build .claude node_modules
+
 lint: lint-html lint-json
 	@## run all linters
 
 lint-html:
 	@## lint HTML files
-	$(Q) find $(REPO_ROOT) -name '*.html' -not -path '*/.git/*' -not -path '*/build/*' | xargs htmlhint
+	$(Q) find $(REPO_ROOT) -name '*.html' $(foreach d,$(LINT_HTML_EXCLUDE),-not -path '*/$d/*') | xargs htmlhint
 
 lint-json:
 	@## lint JSON files
-	$(Q) find $(REPO_ROOT) -name '*.json' -not -path '*/.git/*' -not -path '*/build/*' -not -path '*/.claude/*' | while read f; do $(PYTHON) -m json.tool "$$f" > /dev/null || exit 1; done
+	$(Q) find $(REPO_ROOT) -name '*.json' $(foreach d,$(LINT_JSON_EXCLUDE),-not -path '*/$d/*') | while read f; do $(PYTHON) -m json.tool "$$f" > /dev/null || exit 1; done
 
 serve:
 	@## start local dev server
