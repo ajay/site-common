@@ -4,20 +4,7 @@ SITE_COMMON_ROOT := $(dir $(lastword $(MAKEFILE_LIST)))..
 
 ################################################################################
 
--include $(SITE_COMMON_ROOT)/tools/build-tools/makefiles/help.mk
--include $(SITE_COMMON_ROOT)/tools/build-tools/makefiles/functions.mk
--include $(SITE_COMMON_ROOT)/tools/build-tools/makefiles/lint.mk
--include $(SITE_COMMON_ROOT)/tools/build-tools/makefiles/os.mk
--include $(SITE_COMMON_ROOT)/tools/build-tools/makefiles/repo.mk
-
-################################################################################
-
-SHELL := bash
-
-MAKEFLAGS += -rR                        # do not use make's built-in rules and variables
-MAKEFLAGS += -k                         # keep going on errors
-MAKEFLAGS += --warn-undefined-variables
-MAKEFLAGS += --no-print-directory
+-include $(SITE_COMMON_ROOT)/tools/build-tools/makefiles.mk
 
 ################################################################################
 
@@ -28,21 +15,6 @@ ifeq ($(verbose), true)
 else
 	Q := @
 endif
-
-################################################################################
-
-COMMIT := $(shell git rev-parse --short HEAD)
-PROJECT_NAME := $(notdir $(CURDIR))
-PYTHON := python3
-REPO_ROOT ?= $(shell git rev-parse --show-toplevel)
-RM := rm -rf
-
-################################################################################
-
-$(info )
-$(info PROJECT = $(PROJECT_NAME))
-$(info COMMIT  = $(COMMIT))
-$(info )
 
 ################################################################################
 

@@ -19,20 +19,7 @@ endif
 
 ################################################################################
 
--include $(REPO_ROOT)/tools/build-tools/makefiles/help.mk
--include $(REPO_ROOT)/tools/build-tools/makefiles/lint.mk
--include $(REPO_ROOT)/tools/build-tools/makefiles/os.mk
--include $(REPO_ROOT)/tools/build-tools/makefiles/repo.mk
-
-################################################################################
-
-PYTHON := python3
-SHELL := bash
-
-MAKEFLAGS += -rR
-MAKEFLAGS += -k
-MAKEFLAGS += --warn-undefined-variables
-MAKEFLAGS += --no-print-directory
+-include $(REPO_ROOT)/tools/build-tools/makefiles.mk
 
 ################################################################################
 
