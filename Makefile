@@ -20,6 +20,7 @@ endif
 ################################################################################
 
 -include $(REPO_ROOT)/tools/build-tools/makefiles/help.mk
+-include $(REPO_ROOT)/tools/build-tools/makefiles/lint.mk
 -include $(REPO_ROOT)/tools/build-tools/makefiles/repo.mk
 
 ################################################################################
@@ -50,19 +51,5 @@ ci: repo-check lint
 install-deps:
 	@## install dependencies
 	tools/deps/os/$(OS).sh
-
-LINT_HTML_EXCLUDE := .git build node_modules
-LINT_JSON_EXCLUDE := .git build .claude node_modules
-
-lint: lint-html lint-json
-	@## run all linters
-
-lint-html:
-	@## lint HTML files
-	find $(REPO_ROOT) -name '*.html' $(foreach d,$(LINT_HTML_EXCLUDE),-not -path '*/$d/*') | xargs htmlhint
-
-lint-json:
-	@## lint JSON files
-	find $(REPO_ROOT) -name '*.json' $(foreach d,$(LINT_JSON_EXCLUDE),-not -path '*/$d/*') | while read f; do $(PYTHON) -m json.tool "$$f" > /dev/null || exit 1; done
 
 ################################################################################
