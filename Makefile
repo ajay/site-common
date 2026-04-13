@@ -21,6 +21,7 @@ endif
 
 -include $(REPO_ROOT)/tools/build-tools/makefiles/help.mk
 -include $(REPO_ROOT)/tools/build-tools/makefiles/lint.mk
+-include $(REPO_ROOT)/tools/build-tools/makefiles/os.mk
 -include $(REPO_ROOT)/tools/build-tools/makefiles/repo.mk
 
 ################################################################################
@@ -32,14 +33,6 @@ MAKEFLAGS += -rR
 MAKEFLAGS += -k
 MAKEFLAGS += --warn-undefined-variables
 MAKEFLAGS += --no-print-directory
-
-################################################################################
-
-ifeq ($(shell uname -s),Darwin)
-	OS := mac
-else
-	OS := $(shell lsb_release -is | tr A-Z a-z)
-endif
 
 ################################################################################
 

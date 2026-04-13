@@ -7,6 +7,7 @@ SITE_COMMON_ROOT := $(dir $(lastword $(MAKEFILE_LIST)))..
 include $(SITE_COMMON_ROOT)/tools/build-tools/makefiles/help.mk
 include $(SITE_COMMON_ROOT)/tools/build-tools/makefiles/functions.mk
 include $(SITE_COMMON_ROOT)/tools/build-tools/makefiles/lint.mk
+include $(SITE_COMMON_ROOT)/tools/build-tools/makefiles/os.mk
 include $(SITE_COMMON_ROOT)/tools/build-tools/makefiles/repo.mk
 
 ################################################################################
@@ -42,14 +43,6 @@ $(info )
 $(info PROJECT = $(PROJECT_NAME))
 $(info COMMIT  = $(COMMIT))
 $(info )
-
-################################################################################
-
-ifeq ($(shell uname -s),Darwin)
-	OS := mac
-else
-	OS := $(shell lsb_release -is | tr A-Z a-z)
-endif
 
 ################################################################################
 
