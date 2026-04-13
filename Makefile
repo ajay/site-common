@@ -24,6 +24,7 @@ endif
 
 ################################################################################
 
+PYTHON := python3
 SHELL := bash
 
 MAKEFLAGS += -rR
@@ -33,9 +34,32 @@ MAKEFLAGS += --no-print-directory
 
 ################################################################################
 
+ifeq ($(shell uname -s),Darwin)
+	OS := mac
+else
+	OS := $(shell lsb_release -is | tr A-Z a-z)
+endif
+
+################################################################################
+
 .DEFAULT_GOAL := help
 
-ci: repo-check
+ci: repo-check lint
 	@## run CI checks
+
+install-deps:
+	@## install dependencies
+	tools/deps/os/$(OS).sh
+
+lint: lint-html lint-json
+	@## run all linters
+
+lint-html:
+	@## lint HTML files
+	find $(REPO_ROOT) -name '*.html' -not -path '*/.git/*' -not -path '*/build/*' | xargs htmlhint
+
+lint-json:
+	@## lint JSON files
+	find $(REPO_ROOT) -name '*.json' -not -path '*/.git/*' -not -path '*/build/*' -not -path '*/.claude/*' | while read f; do $(PYTHON) -m json.tool "$$f" > /dev/null || exit 1; done
 
 ################################################################################
