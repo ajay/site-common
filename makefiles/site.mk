@@ -8,7 +8,7 @@ SITE_COMMON_ROOT := $(dir $(lastword $(MAKEFILE_LIST)))..
 
 ################################################################################
 
-.PHONY: help ci clean dev serve versions
+.PHONY: help ci clean dev serve
 
 .DEFAULT_GOAL := help
 
@@ -30,9 +30,5 @@ dev: serve
 serve:
 	@## start local dev server
 	$(Q) $(PYTHON) -m http.server 8000
-
-versions::
-	@## print tool versions
-	$(call print_tool_version,$(PYTHON),$(PYTHON))
 
 ################################################################################
