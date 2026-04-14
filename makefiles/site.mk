@@ -8,13 +8,13 @@ SITE_COMMON_ROOT := $(dir $(lastword $(MAKEFILE_LIST)))..
 
 ################################################################################
 
-.PHONY: help ci clean dev install-deps serve versions
+.PHONY: help ci clean dev serve versions
 
 .DEFAULT_GOAL := help
 
 ################################################################################
 
-ci: repo-check lint
+ci: repo-check deps-check lint
 	@## run CI checks and build
 	$(Q) if make -n build 2>/dev/null; then \
 		$(MAKE) build; \
@@ -26,10 +26,6 @@ clean::
 
 dev: serve
 	@## alias for serve
-
-install-deps:
-	@## install dependencies
-	$(SITE_COMMON_ROOT)/tools/build-tools/tools/deps/os/$(OS).sh
 
 serve:
 	@## start local dev server

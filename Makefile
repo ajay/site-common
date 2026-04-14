@@ -25,11 +25,7 @@ endif
 
 .DEFAULT_GOAL := help
 
-ci: repo-check lint
+ci: repo-check deps-check lint
 	@## run CI checks
-
-install-deps:
-	@## install dependencies
-	$(REPO_ROOT)/tools/build-tools/tools/deps/os/$(OS).sh
 
 ################################################################################
