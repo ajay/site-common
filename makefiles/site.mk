@@ -14,7 +14,7 @@ SITE_COMMON_ROOT := $(dir $(lastword $(MAKEFILE_LIST)))..
 
 ################################################################################
 
-ci: repo-check deps-check lint
+ci: git-check deps-check lint
 	@## run CI checks and build
 	$(Q) if make -n build 2>/dev/null; then \
 		$(MAKE) build; \
