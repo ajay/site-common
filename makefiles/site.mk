@@ -10,24 +10,32 @@ SITE_COMMON_ROOT := $(dir $(lastword $(MAKEFILE_LIST)))..
 
 ################################################################################
 
-.PHONY: help ci clean dev serve
+.PHONY: build ci clean dev help rebuild redev serve
 
 .DEFAULT_GOAL := help
 
 ################################################################################
 
-ci: git-check deps-check lint
+build::
+	@## build
+
+ci: git-check deps-check lint build
 	@## run CI checks and build
-	$(Q) if make -n build 2>/dev/null; then \
-		$(MAKE) build; \
-	fi
 
 clean::
 	@## clean generated files
 	$(Q) $(RM) build
 
-dev: serve
-	@## alias for serve
+dev: build serve
+	@## build & start local dev server
+
+rebuild: clean
+	@## clean and rebuild from scratch
+	$(Q) $(MAKE) build
+
+redev: clean
+	@## clean, rebuild, and start local dev server
+	$(Q) $(MAKE) dev
 
 serve:
 	@## start local dev server
